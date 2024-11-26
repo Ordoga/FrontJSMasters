@@ -18,7 +18,7 @@ export function Lobby() {
     return (
         <div className='w-full bg-slate-400 flex flex-col items-center'>
             <div>Choose Code Block</div>
-            <CodeBlockList codeBlocks={codeblocks} />
+            <CodeBlockList codeblocks={codeblocks} />
         </div>
     )
 }

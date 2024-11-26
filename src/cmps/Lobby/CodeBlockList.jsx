@@ -1,10 +1,11 @@
 import { CodeBlockPreview } from './CodeBlockPreview'
 
-export default function CodeBlockList({ codeBlocks }) {
+export default function CodeBlockList({ codeblocks }) {
+    console.log(codeblocks)
     return (
         <div>
-            {codeBlocks.map(codeBlock => (
-                <CodeBlockPreview codeBlock={codeBlock} key={codeBlock.id} />
+            {codeblocks?.map(codeblock => (
+                <CodeBlockPreview codeblock={codeblock} key={codeblock._id} />
             ))}
         </div>
     )
