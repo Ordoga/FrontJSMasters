@@ -1,12 +1,14 @@
 import { useParams } from 'react-router-dom'
 import { codeblockService } from '../../services/codeblock.service'
 import { useEffect, useState } from 'react'
+import { socketService } from '../../services/socket.service'
 
 export default function CodeBlockPage() {
     const [codeblock, setCodeblock] = useState(null)
     const params = useParams()
 
     useEffect(() => {
+        socketService.emit('new', 'data')
         loadCodeblock()
     }, [params])
 
