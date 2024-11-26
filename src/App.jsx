@@ -12,7 +12,7 @@ function App() {
                 <Header />
                 <Routes>
                     <Route path='/' element={<Lobby />} />
-                    <Route path='/:codeblockId' element={<CodeBlockPage />} />
+                    <Route path='/codeblock/:codeblockId' element={<CodeBlockPage />} />
                 </Routes>
             </div>
         </Router>
