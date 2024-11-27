@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { socketService } from '../../services/socket.service'
 import Editor from '@monaco-editor/react'
 
-export default function CodeBlockPage({ nickname }) {
+export default function CodeBlockPage({ userData }) {
     const [codeblock, setCodeblock] = useState(null)
     const [isMentor, setIsMentor] = useState(null)
     const [isSolved, setIsSolved] = useState(false)
@@ -14,7 +14,7 @@ export default function CodeBlockPage({ nickname }) {
 
     // Mount to the dom
     useEffect(() => {
-        socketService.emit('entered-codeblock-page', { codeblockId: params.codeblockId })
+        socketService.emit('enter-codeblock-page', { codeblockId: params.codeblockId })
         socketService.on('update-code', updateCode)
         socketService.on('set-role', setRole)
         socketService.on('mentor-left', navigateToLobby)
