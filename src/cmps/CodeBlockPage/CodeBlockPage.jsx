@@ -50,7 +50,7 @@ export default function CodeBlockPage({}) {
     async function loadCodeblock() {
         try {
             const codeblock = await codeblockService.getCodeblockById(params.codeblockId)
-            setCodeblock({ ...codeblock, currentCode: codeblock.initalCode })
+            setCodeblock({ ...codeblock, currentCode: codeblock.initialCode })
         } catch (err) {
             console.log(err)
         }
@@ -61,7 +61,7 @@ export default function CodeBlockPage({}) {
     }
 
     function resetCode() {
-        setCodeblock(prevState => ({ ...prevState, currentCode: prevState.initalCode }))
+        setCodeblock(prevState => ({ ...prevState, currentCode: prevState.initialCode }))
     }
 
     async function handleCodeChange(value, event) {
@@ -83,6 +83,7 @@ export default function CodeBlockPage({}) {
             scrollbar: {
                 vertical: 'auto',
             },
+            wordWrap: 'on',
         },
     }
     return (
