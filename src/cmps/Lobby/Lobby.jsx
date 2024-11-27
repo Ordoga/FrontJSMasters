@@ -23,7 +23,7 @@ export function Lobby() {
     }
 
     return (
-        <div className='w-full flex flex-col items-center'>
+        <div className='flex flex-col items-center'>
             <div className='text-3xl p-4 weight font-semibold'>Choose Code Block</div>
             <div className='w-full flex flex-col justify-center items-center'>
                 <CodeBlockList lbl={'Easy'} codeblocks={codeblocks[1]} />

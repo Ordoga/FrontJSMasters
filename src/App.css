@@ -19,3 +19,31 @@
         animation: logo-spin infinite 20s linear;
     }
 }
+
+.app-layout {
+    display: grid;
+    grid-template-areas:
+        'header header'
+        'sidebar main' !important;
+    grid-template-columns: 1fr 10fr;
+    grid-template-rows: 80px 1fr;
+    width: 100vw;
+    height: 100vh;
+}
+
+.header {
+    grid-area: header;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    min-width: 160px;
+}
+
+.main {
+    grid-area: main;
+}
+
+.codeblock-preview .monaco-editor .view-lines {
+    cursor: pointer !important;
+}

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { socketService } from '../../services/socket.service'
 import Editor from '@monaco-editor/react'
 
-export default function CodeBlockPage() {
+export default function CodeBlockPage({ nickname }) {
     const [codeblock, setCodeblock] = useState(null)
     const [isMentor, setIsMentor] = useState(null)
     const [isSolved, setIsSolved] = useState(false)
@@ -21,8 +21,9 @@ export default function CodeBlockPage() {
         socketService.on('problem-solved', showSmiley)
         loadCodeblock()
 
-        // Unmounted - Go to lobby
+        // Unmounted - Go to lobby or different page
         return () => {
+            socketService.emit('return-lobby')
             // Leave all rooms
         }
     }, [])
@@ -31,12 +32,10 @@ export default function CodeBlockPage() {
     useEffect(() => {
         // Change Room
         // How to make it not happen on the first render?
-        // socketService.emit('entered-codeblock-page', { codeblockId: params.codeblockId })
+        socketService.emit('entered-codeblock-page', { codeblockId: params.codeblockId })
     }, [params])
 
     function setRole(isMentor) {
-        console.log(isMentor)
-
         setIsMentor(isMentor)
     }
 
@@ -71,26 +70,32 @@ export default function CodeBlockPage() {
     }
 
     if (!codeblock) return
+    const editorProps = {
+        height: '100%',
+        value: codeblock.currentCode,
+        language: 'javascript',
+        onChange: handleCodeChange,
+        theme: 'vs-dark',
+        options: {
+            readOnly: isMentor || isSolved,
+            fontSize: 20,
+            scrollBeyondLastLine: false,
+            scrollbar: {
+                vertical: 'auto',
+            },
+        },
+    }
     return (
         <div className='w-full flex flex-col items-center'>
-            <h1>{codeblock.name}</h1>
+            <div className='grid w-full grid-cols-3'>
+                <button className='justify-self-start bg-transparent border-none' onClick={navigateToLobby}>
+                    Back To Lobby
+                </button>
+                <h1 className='text-center col-span-1 text-2xl'>{codeblock.name}</h1>
+            </div>
             <h2>{isMentor ? 'Mentor' : 'Student'}</h2>
             <div className='size-[75vh] rounded-lg overflow-hidden'>
-                <Editor
-                    height='100%'
-                    value={codeblock.currentCode}
-                    language='javascript'
-                    onChange={handleCodeChange}
-                    theme='vs-dark'
-                    options={{
-                        readOnly: isMentor,
-                        fontSize: 20,
-                        scrollBeyondLastLine: false,
-                        scrollbar: {
-                            vertical: 'auto',
-                        },
-                    }}
-                />
+                <Editor {...editorProps} />
             </div>
             {isMentor && (
                 <button onClick={resetCode} className='m-2 bg-[#4A628A] text-[#DFF2EB]'>
