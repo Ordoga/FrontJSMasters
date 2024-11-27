@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client'
 
-const baseUrl = process.env.NODE_ENV === 'production' ? '' : '//localhost:3030'
+const baseUrl = process.env.NODE_ENV === 'production' ? 'https://backjsmasters.onrender.com/' : '//localhost:3030'
 export const socketService = createSocketService()
 
 // To Change - This creates the socket the moment a user logs into the site
@@ -17,6 +17,9 @@ function createSocketService() {
         },
         emit(eventName, data) {
             socket.emit(eventName, data)
+        },
+        disconnect() {
+            socket.disconnect()
         },
     }
     return socketService

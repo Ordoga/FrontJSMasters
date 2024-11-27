@@ -8,21 +8,28 @@ export function Lobby() {
 
     useEffect(() => {
         getCodeblocks()
-
-        socketService.on('user-connected', data => {
-            console.log(data)
-        })
     }, [])
 
     async function getCodeblocks() {
         const codeblocks = await codeblockService.query()
-        setCodeblocks(codeblocks)
+        const blocksByLevel = {}
+        codeblocks.forEach(codeblock => {
+            if (!blocksByLevel[codeblock.level]) {
+                blocksByLevel[codeblock.level] = []
+            }
+            blocksByLevel[codeblock.level].push(codeblock)
+        })
+        setCodeblocks(blocksByLevel)
     }
 
     return (
-        <div className='w-full bg-slate-400 flex flex-col items-center'>
-            <div>Choose Code Block</div>
-            <CodeBlockList codeblocks={codeblocks} />
+        <div className='w-full flex flex-col items-center'>
+            <div className='text-3xl p-4 weight font-semibold'>Choose Code Block</div>
+            <div className='w-full flex flex-col justify-center items-center'>
+                <CodeBlockList lbl={'Easy'} codeblocks={codeblocks[1]} />
+                <CodeBlockList lbl={'Medium'} codeblocks={codeblocks[2]} />
+                <CodeBlockList lbl={'Hard'} codeblocks={codeblocks[3]} />
+            </div>
         </div>
     )
 }
