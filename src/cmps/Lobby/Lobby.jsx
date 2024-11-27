@@ -3,10 +3,11 @@ import CodeBlockList from './CodeBlockList'
 import { codeblockService } from '../../services/codeblock.service'
 import { socketService } from '../../services/socket.service'
 
-export function Lobby() {
+export function Lobby({ userData }) {
     const [codeblocks, setCodeblocks] = useState([])
 
     useEffect(() => {
+        socketService.emit('enter-lobby')
         getCodeblocks()
     }, [])
 

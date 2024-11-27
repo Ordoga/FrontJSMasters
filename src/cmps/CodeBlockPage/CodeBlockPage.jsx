@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react'
 import { socketService } from '../../services/socket.service'
 import Editor from '@monaco-editor/react'
 
-export default function CodeBlockPage({ userData }) {
+export default function CodeBlockPage({}) {
     const [codeblock, setCodeblock] = useState(null)
     const [isMentor, setIsMentor] = useState(null)
+    const [usersInRoom, setUsersInRoom] = useState(null)
     const [isSolved, setIsSolved] = useState(false)
 
     const params = useParams()
@@ -17,16 +18,15 @@ export default function CodeBlockPage({ userData }) {
         socketService.emit('enter-codeblock-page', { codeblockId: params.codeblockId })
         socketService.on('update-code', updateCode)
         socketService.on('set-role', setRole)
+        socketService.on('set-users-in-room', updateActiveUsers)
         socketService.on('mentor-left', navigateToLobby)
         socketService.on('problem-solved', showSmiley)
         loadCodeblock()
-
-        // Unmounted - Go to lobby or different page
-        return () => {
-            socketService.emit('return-lobby')
-            // Leave all rooms
-        }
     }, [])
+
+    function updateActiveUsers(userCount) {
+        setUsersInRoom(userCount)
+    }
 
     // Changed room - NOT DISCONNECTED
     useEffect(() => {
@@ -91,7 +91,7 @@ export default function CodeBlockPage({ userData }) {
                 <button className='justify-self-start bg-transparent border-none' onClick={navigateToLobby}>
                     Back To Lobby
                 </button>
-                <h1 className='text-center col-span-1 text-2xl'>{codeblock.name}</h1>
+                <h1 className='text-center col-span-1 text-2xl'>{`${codeblock.name} Active Students: ${usersInRoom - 1}`}</h1>
             </div>
             <h2>{isMentor ? 'Mentor' : 'Student'}</h2>
             <div className='size-[75vh] rounded-lg overflow-hidden'>

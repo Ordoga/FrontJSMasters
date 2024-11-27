@@ -8,36 +8,29 @@ import { useEffect, useState } from 'react'
 import { socketService } from './services/socket.service.js'
 import Sidebar from './cmps/Sidebar.jsx'
 function App() {
-    const [userData, setUserData] = useState(null)
-    const [userList, setUserList] = useState([])
+    // const [userData, setUserData] = useState(null)
+    // const [userList, setUserList] = useState([])
 
     useEffect(() => {
-        const nickname = prompt('Please Choose Nickname')
-        // setNickname(nickname ? nickname : 'Default User')
-        socketService.emit('setup-socket', { nickname })
-        socketService.on('update-user-list', userList => {
-            setUserList(userList)
-        })
-        socketService.on('set-user-data', userData => {
-            setUserData(userData)
-        })
-        setUserList([
-            { nickname: 'Or', score: 150, id: 1 },
-            { nickname: 'Oriel', score: 2503, id: 2 },
-            { nickname: 'Nurit', score: 1523, id: 3 },
-            { nickname: 'Itzik', score: 2512, id: 4 },
-        ])
+        // const nickname = prompt('Please Choose Nickname') || 'Default Name'
+        // socketService.emit('setup-socket', { nickname })
+        // socketService.on('set-user-data', userData => {
+        //     setUserData(userData)
+        // })
+        // socketService.on('set-connected-users', userList => {
+        //     setUserList(userList)
+        // })
     }, [])
 
     return (
         <Router>
             <div className='app-layout'>
-                <Header userData={userData} />
-                <Sidebar userList={userList} />
+                <Header />
+                {/* <Sidebar /> */}
                 <main className='bg-[#DFF2EB] main'>
                     <Routes>
                         <Route path='/' element={<Lobby />} />
-                        <Route path='/codeblock/:codeblockId' element={<CodeBlockPage userData={userData} />} />
+                        <Route path='/codeblock/:codeblockId' element={<CodeBlockPage />} />
                     </Routes>
                 </main>
             </div>
