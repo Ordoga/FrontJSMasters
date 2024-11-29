@@ -46,5 +46,5 @@ JS Masters is a modern web application designed to help users collaborate and im
 
 ## Screenshots
 
-![](./public/imgs/JS-Masters1.png)
-![](./public/imgs/JS-Masters2.png)
+![](./public/JS-Masters1.png)
+![](./public/JS-Masters2.png)
