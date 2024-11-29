@@ -1,32 +1,17 @@
 #root {
-    /* max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center; */
-}
-
-@keyframes logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    a:nth-of-type(2) .logo {
-        animation: logo-spin infinite 20s linear;
-    }
+    --primary-color: #f1f1f1;
+    --secondary-color: #f1f1f1;
+    --text-color: #292929;
+    color: var(--text-color);
 }
 
 .app-layout {
     display: grid;
     grid-template-areas:
         'header header'
-        'sidebar main' !important;
+        'main main';
     grid-template-columns: 1fr 10fr;
-    grid-template-rows: 80px 1fr;
+    grid-template-rows: 70px 1fr;
     width: 100vw;
     height: 100vh;
 }
@@ -46,4 +31,64 @@
 
 .codeblock-preview .monaco-editor .view-lines {
     cursor: pointer !important;
+}
+
+.text-main {
+    color: var(--primary-color);
+}
+
+.text-sec {
+    color: var(--secondary-color);
+}
+
+.text-bright {
+    color: var(--text-color);
+}
+
+.bg-main {
+    background: var(--primary-color);
+}
+
+.bg-sec {
+    background: var(--secondary-color);
+}
+
+.orange-button {
+    background-color: rgb(249 115 22);
+    height: 44px;
+    width: 170px;
+    color: var(--primary-color);
+    margin-top: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    border-radius: 0.25rem;
+}
+.orange-button:hover {
+    background-color: rgb(234 88 12);
+}
+
+@keyframes flash {
+    0% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.7;
+    }
+}
+
+.live-flash {
+    animation: flash 2s infinite;
+}
+
+.tailwind-try {
+    @apply bg-red-700;
+}
+
+.card {
+    @apply relative rounded-lg overflow-hidden shadow transition-all;
 }
