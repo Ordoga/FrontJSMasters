@@ -1,8 +1,6 @@
 import { CodeBlockPreview } from './CodeBlockPreview'
 
 export default function CodeBlockList({ codeblocks, lbl }) {
-    console.log(codeblocks)
-
     return (
         <div className='flex flex-col w-[90vw] flex-nowrap gap-y-6 items-center rounded-2xl mobile:pl-0'>
             <h2 className='text-3xl pt-4 mobile:pl-0'>{`${lbl} Codeblocks`}</h2>

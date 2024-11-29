@@ -29,14 +29,14 @@ export function CodeBlockPreview({ codeblock }) {
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
             >
-                <div className='h-1/3 flex items-center justify-center transition-all ease-out duration-500 group-hover:h-[50%]'>
+                <div className='h-1/3 relative flex items-center justify-center transition-all ease-out duration-500 group-hover:h-[50%]'>
                     <Editor
-                        className=''
                         value={codeblock.initialCode}
-                        language={isHovered ? 'javascript' : 'plaintext'}
+                        language={isHovered ? 'javascript' : 'plain-text'}
                         theme='vs-dark'
                         options={editorOptions}
                     />
+                    <div className='w-full h-full z-10 absolute'></div>
                 </div>
 
                 <div className='px-2 py-2 h-3/4 bg-transparent flex flex-col gap-2 max-w-[280px]'>
@@ -51,20 +51,6 @@ export function CodeBlockPreview({ codeblock }) {
                     >
                         Go To Code Block
                     </button>
-                    {/* // TODO Extract Classes */}
-                </div>
-                <div
-                    className={`absolute top-2 right-2 w-16 h-5 bg-gray-200 rounded-xl flex items-center justify-around border px-[3px] ${
-                        codeblock.isActive
-                            ? 'border-green-600 font-semibold'
-                            : 'bg-neutral-800 text-zinc-500 opacity-70 border-none'
-                    }`}
-                >
-                    <div className=''>Live</div>
-                    <div
-                        // TODO Extract Classes
-                        className={`size-[14px] rounded-3xl  ${codeblock.isActive ? 'bg-green-600 live-flash' : 'bg-red-950'}`}
-                    ></div>
                 </div>
             </div>
         </Link>

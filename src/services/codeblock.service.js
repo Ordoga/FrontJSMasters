@@ -6,11 +6,19 @@ export const codeblockService = {
 }
 
 async function query() {
-    const codeblocks = await httpService.get('codeblock')
-    return codeblocks
+    try {
+        const codeblocks = await httpService.get('codeblock')
+        return codeblocks
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 async function getCodeblockById(codeblockId) {
-    const codeblock = await httpService.get(`codeblock/${codeblockId}`)
-    return codeblock
+    try {
+        const codeblock = await httpService.get(`codeblock/${codeblockId}`)
+        return codeblock
+    } catch (err) {
+        console.log(err)
+    }
 }

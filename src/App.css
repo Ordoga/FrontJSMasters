@@ -1,6 +1,6 @@
 #root {
     --primary-color: #f1f1f1;
-    --secondary-color: #f1f1f1;
+    --secondary-color: rgb(249 115 22);
     --text-color: #292929;
     color: var(--text-color);
 }
@@ -20,17 +20,8 @@
     grid-area: header;
 }
 
-.sidebar {
-    grid-area: sidebar;
-    min-width: 160px;
-}
-
 .main {
     grid-area: main;
-}
-
-.codeblock-preview .monaco-editor .view-lines {
-    cursor: pointer !important;
 }
 
 .text-main {
@@ -49,24 +40,70 @@
     background: var(--primary-color);
 }
 
-.bg-sec {
-    background: var(--secondary-color);
-}
-
 .orange-button {
     background-color: rgb(249 115 22);
-    height: 44px;
-    width: 170px;
+    height: 40px;
+    width: 160px;
     color: var(--primary-color);
-    margin-top: 16px;
+    margin-top: 8px;
     font-weight: 700;
     text-transform: uppercase;
     font-size: 0.875rem;
     line-height: 1.25rem;
     border-radius: 0.25rem;
 }
+
 .orange-button:hover {
     background-color: rgb(234 88 12);
+}
+
+.live-flash {
+    animation: flash 2s infinite;
+}
+
+.card {
+    @apply relative rounded-lg overflow-hidden shadow transition-all;
+}
+
+/* Solution Solved Smilly classes */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    animation: fadeIn 2s, fadeOut 2s ease-out 2s;
+}
+.overlay-image {
+    max-width: 50%;
+    max-height: 50%;
+    border-radius: 8px;
+}
+
+/* Animations */
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+/* Fade-out animation */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
 
 @keyframes flash {
@@ -79,16 +116,4 @@
     100% {
         opacity: 0.7;
     }
-}
-
-.live-flash {
-    animation: flash 2s infinite;
-}
-
-.tailwind-try {
-    @apply bg-red-700;
-}
-
-.card {
-    @apply relative rounded-lg overflow-hidden shadow transition-all;
 }

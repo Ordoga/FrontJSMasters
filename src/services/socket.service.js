@@ -2,6 +2,7 @@ import { io } from 'socket.io-client'
 
 export const SOCKET_EVENT_ENTER_LOBBY = 'enter-lobby'
 export const SOCKET_EVENT_ENTER_CODEBLOCK_PAGE = 'enter-codeblock-page'
+export const SOCKET_EVENT_CODE_CHANGED = 'code-changed'
 
 export const SOCKET_EVENT_UPDATE_CODE = 'update-code'
 export const SOCKET_EVENT_SET_ROLE = 'set-role'
@@ -13,7 +14,6 @@ export const SOCKET_EVENT_RESET_CODE = 'reset-code'
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://backjsmasters.onrender.com/' : '//localhost:3030'
 export const socketService = createSocketService()
 
-// To Change - This creates the socket the moment a user logs into the site
 socketService.setup()
 
 function createSocketService() {
